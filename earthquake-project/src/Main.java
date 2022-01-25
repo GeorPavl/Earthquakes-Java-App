@@ -1,38 +1,55 @@
+import java.util.ArrayList;
+
 public class Main {
 
+    private static EarthquakeDB earthquakeDB = new EarthquakeDB();
+
+    private static EarthquakeDB earthquakeDBAfterCalculations = new EarthquakeDB();
+
     public static void main(String[] args) {
-	// write your code here
 
-//        Date date = new Date(1994, 6, 1, 15, 47, 13);
-//        Date date1 = new Date(1995, 5, 10, 16, 3, 0);
-//        Date date2 = new Date(1995, 5, 10, 16, 3, 0);
-//        Date date3 = new Date(2022, 2, 25, 12);
-//        Date date4 = new Date(2021, 1, 12);
-//
-//        System.out.println(date.toString());
-//        System.out.println(date1.toString());
-//        System.out.println(date3.toString());
-//        System.out.println(date4.toString());
-//
-//        System.out.println(date.equals(date1));
-//        System.out.println(date1.equals(date2));
-//        System.out.println(date2.equals(date1));
-//
-//        System.out.println(date.hashCode());
-//        System.out.println(date1.hashCode());
-//        System.out.println(date2.hashCode());
+        initializeDatabase();
 
-        Location location = new Location(40.669453967131986, 22.898985644868066);
-        Location location1 = new Location(40.674954776484576, 22.911860247093873);
-        Location location2 = new Location(40.674954776484576, 22.911860247093873);
+        System.out.println(earthquakeDB.toString());
 
-        System.out.println(location.toString());
-        System.out.println(location1.toString());
-        System.out.println(location2.toString());
+        System.out.println("##");
 
-        System.out.println(location1.equals(location2));
-        System.out.println(location1.equals(location));
+        initializeNewDatabase();
 
-        System.out.println(location.distanceFrom(location1));
+        System.out.println(earthquakeDBAfterCalculations.toString());
+    }
+
+    private static void initializeDatabase() {
+        Date date = new Date(2021,2, 10, 13, 45, 57);
+        earthquakeDB.add(new Earthquake(date, 2.6, 2, 22.1, 39.7));
+
+        Date date1 = new Date(2021,2,10,14,50,13);
+        earthquakeDB.add(new Earthquake(date1, 4.2, 6, 20.5, 38.7));
+
+        Date date2 = new Date(2021,2,11,18,19,13);
+        earthquakeDB.add(new Earthquake(date2, 3.2, 6, 21.5, 39.1));
+
+        Date date3 = new Date(2021,2,10,14,0,0);
+        earthquakeDB.add(new Earthquake(date3, 3,2, 21.1, 38.5));
+
+        Date date4 = new Date(2021,2,12,5,30,0);
+        earthquakeDB.add(new Earthquake(date4, 4,8,20.8,38.5));
+    }
+
+    private static void initializeNewDatabase() {
+        ArrayList<Earthquake> withingDay = earthquakeDB.withinDay(new Date(2021,2,10));
+        System.out.println(withingDay.toString());
+        System.out.println("#");
+        ArrayList<Earthquake> withinMagnitudeRange = earthquakeDB.withinMagnitudeRange(2.9,4.5);
+        System.out.println(withinMagnitudeRange.toString());
+        System.out.println("#");
+        ArrayList<Earthquake> withingDistance = earthquakeDB.withinDistance(new Location(21.1, 38.5), 60);
+        System.out.println(withingDistance.toString());
+
+        for (Earthquake e : withingDay) {
+            if (withingDistance.contains(e) && withinMagnitudeRange.contains(e)) {
+                earthquakeDBAfterCalculations.add(e);
+            }
+        }
     }
 }
