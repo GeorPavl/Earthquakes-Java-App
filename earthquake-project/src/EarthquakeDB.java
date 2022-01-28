@@ -23,6 +23,7 @@ public class EarthquakeDB {
         String result = "";
         for (Earthquake e : this.earthquakes) {
             result += counter + ". " + e.toString() + "\n";
+            counter++;
         }
         return result;
     }

@@ -59,13 +59,16 @@ public class Location {
     // Other methods
 
     public double distanceFrom(Location location) {
-        double f1 = Math.toRadians(getLatitude());
-        double f2 = Math.toRadians(getLongitude());
-        double l1 = Math.toRadians(location.getLatitude());
-        double l2 = Math.toRadians(location.getLongitude());
-        int r = 6371; // earth's radius in km
-        double firstFactor = Math.pow(Math.sin((f2 - f1) / 2), 2);
-        double secondFactor = Math.cos(f1) * Math.cos(f2) * Math.pow(Math.sin((l2 - l1) / 2),2);
-        return 2 * r * Math.asin(Math.sqrt(firstFactor + secondFactor));
+        double f1 = Math.toRadians(this.latitude);
+        double f2 = Math.toRadians(location.latitude);
+        double l1 = Math.toRadians(this.longitude);
+        double l2 = Math.toRadians(location.longitude);
+        double r = 6371; // η ακτίνα της γης σε χιλιόμετρα
+        double distance = 2 * r *
+                Math.asin(Math.sqrt(
+                        Math.pow(Math.sin((f2-f1)/2),2) +
+                                Math.cos(f1) * Math.cos(f2) * Math.pow(Math.sin((l2-l1)/2),2)
+                ));
+        return distance;
     }
 }
