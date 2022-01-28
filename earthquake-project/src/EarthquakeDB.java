@@ -6,12 +6,18 @@ import java.util.ArrayList;
  * */
 public class EarthquakeDB {
 
-    private final ArrayList<Earthquake> earthquakes;
+    private ArrayList<Earthquake> earthquakes;
 
     // Constructor
 
     public EarthquakeDB() {
         this.earthquakes = new ArrayList<>();
+    }
+
+    // Getter
+
+    public ArrayList<Earthquake> getEarthquakes() {
+        return earthquakes;
     }
 
     // Overridden methods

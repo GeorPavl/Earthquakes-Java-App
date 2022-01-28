@@ -7,6 +7,8 @@ import java.util.Objects;
  * */
 public class Earthquake {
 
+    private String title;
+
     private Date date;
 
     private double magnitude;
@@ -31,7 +33,23 @@ public class Earthquake {
         this.epicenter = new Location(longitude, latitude);
     }
 
+    public Earthquake(String title, Double magnitude, Location epicenter){
+        this.title = title;
+        this.magnitude = magnitude;
+        this.epicenter = epicenter;
+    }
+
+    public Earthquake(String title, Double magnitude, Double lon, Double lat){
+        this.title = title;
+        this.magnitude = magnitude;
+        this.epicenter = new Location(lon, lat);
+    }
+
     // Getters
+
+    public String getTitle() {
+        return title;
+    }
 
     public Date getDate() {
         return date;
@@ -51,9 +69,17 @@ public class Earthquake {
 
     // Overridden methods
 
+//    @Override
+//    public String toString() {
+//        return getDate().toString() + ", " + getEpicenter().toString() + ", " + getFocalDepth() + "km, " + getMagnitude() + "μ";
+//    }
     @Override
     public String toString() {
-        return getDate().toString() + ", " + getEpicenter().toString() + ", " + getFocalDepth() + "km, " + getMagnitude() + "μ";
+        return "Earthquake{" +
+                "title='" + title + '\'' +
+                ", magnitude=" + magnitude +
+                ", epicenter=" + epicenter +
+                '}';
     }
 
     @Override
