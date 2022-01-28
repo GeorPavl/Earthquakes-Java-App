@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * */
 public class EarthquakeDB {
 
-    private ArrayList<Earthquake> earthquakes;
+    private final ArrayList<Earthquake> earthquakes;
 
     // Constructor
 
@@ -18,14 +18,14 @@ public class EarthquakeDB {
 
     @Override
     public String toString() {
-        java.util.Collections.sort(this.earthquakes, java.util.Comparator.comparingDouble(Earthquake::getMagnitude));
+        this.earthquakes.sort(java.util.Comparator.comparingDouble(Earthquake::getMagnitude));
         int counter = 1;
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Earthquake e : this.earthquakes) {
-            result += counter + ". " + e.toString() + "\n";
+            result.append(counter).append(". ").append(e.toString()).append("\n");
             counter++;
         }
-        return result;
+        return result.toString();
     }
 
     // Other methods
@@ -97,7 +97,7 @@ public class EarthquakeDB {
             return medianMagnitude;
         }
 
-        java.util.Collections.sort(this.earthquakes, java.util.Comparator.comparingDouble(Earthquake::getMagnitude));
+        this.earthquakes.sort(java.util.Comparator.comparingDouble(Earthquake::getMagnitude));
         int totalEarthquakes = this.earthquakes.size();
 
         if (totalEarthquakes % 2 == 0) {
