@@ -69,17 +69,9 @@ public class Earthquake {
 
     // Overridden methods
 
-//    @Override
-//    public String toString() {
-//        return getDate().toString() + ", " + getEpicenter().toString() + ", " + getFocalDepth() + "km, " + getMagnitude() + "μ";
-//    }
     @Override
     public String toString() {
-        return "Earthquake{" +
-                "title='" + title + '\'' +
-                ", magnitude=" + magnitude +
-                ", epicenter=" + epicenter +
-                '}';
+        return getDate().toString() + ", " + getEpicenter().toString() + ", " + getFocalDepth() + "km, " + getMagnitude() + "μ";
     }
 
     @Override
